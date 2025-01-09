@@ -67,11 +67,11 @@ public class RedisClient {
         let actual_connection = create_nw_connection()
         try await actual_connection.start(queue: DispatchQueue(label: "redis-connection-updates"))
         let redis_connection = RedisConnection(actual_connection)
-        if database != 0 {
-            try await redis_connection.select(Int(database))
-        }
         if let username = username, let password = password {
             try await redis_connection.auth(username, password)
+        }
+        if database != 0 {
+            try await redis_connection.select(Int(database))
         }
         return redis_connection
     }

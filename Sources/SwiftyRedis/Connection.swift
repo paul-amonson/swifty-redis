@@ -90,4 +90,11 @@ public class RedisConnection {
         try await send_packed_command(cmd)
         return try await (1 ... count).mapAsync { _ in try await receive_response() }
     }
+
+    public var isFailed: Bool {
+        switch con.state {
+        case .failed: return true
+        default: return false
+        }
+    }
 }
