@@ -10089,6 +10089,10 @@ public struct XreadStreams: ToRedisArgs {
         self.key = key
         self.id = id
     }
+    public init(_ key: [String], id: [String]) {
+        self.key = key
+        self.id = id
+    }
     public func write_redis_args(out: inout [Data]) {
         key.write_redis_args(out: &out)
         id.write_redis_args(out: &out)
